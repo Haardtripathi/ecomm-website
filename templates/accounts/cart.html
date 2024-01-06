@@ -1,0 +1,143 @@
+<!-- Your Django Template (e.g., cart.html) -->
+
+{% load custom_filters %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        main {
+            display: flex;
+            width: 80%;
+        }
+
+        section {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 65%;
+            margin-right: 1rem;
+        }
+
+        aside {
+            background-color: #f8f8f8;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            color:black;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        button {
+            background-color: #f00;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <!-- Your existing styles and scripts here -->
+</head>
+<body>
+
+<main>
+    <section>
+        <h2>Your Shopping Cart</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Size</th>
+                    <th>Price</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Django code to loop through product details -->
+                {% for product in cart_items_queryset %}
+                {% with price=prices_list|pop_price %}
+                    <tr>
+                        <td>{{product.product}}</td>
+                        <td>{{product.size_variant}}</td>
+                        <td>${{price}}</td>
+                        <td><a href="{% url 'remove_cart' product.uid %}>"><button>Remove</button></a></td>
+                    </tr>
+                    {% endwith %}
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <p>Total: <span id="totalPrice">${{total}}</span></p>
+    </section>
+
+    <aside>
+
+        <h2>Total Price</h2>
+        <p>Total: <span id="totalPriceAside">${{total}}</span></p>
+        <div class="button-container">
+            <a href="{% url 'index' %}"><button class="btn btn-primary">Continue Shopping</button></a>
+            <button id="" class="btn btn-danger">Make Payment</button>
+        </div>
+    </form>
+    </aside>
+</main>
+
+<footer>
+    <p>&copy; 2024 Your Company</p>
+</footer>
+
+
+</body>
+</html>
