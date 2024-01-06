@@ -2,6 +2,7 @@ Django E-commerce Project
 Welcome to our exciting Django E-commerce project! 🚀 This web application is designed to provide a seamless and secure online shopping experience. Read on to discover the key features and how to get started.
 
 Features
+
 1.Seamless User Connections:
   -Implementation of Foreign Keys for users, carts, and products.
   -Ensures a smooth and personalized shopping journey.
